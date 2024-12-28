@@ -1,0 +1,34 @@
+Part 4: Discussion of Experimental Results
+
+4.1 What are the different inputs designed to show?
+
+The different inputs, consisting of matrix sizes of 256x256 and 512x512, are designed to 
+illustrate how the execution time of a CUDA kernel function scales with the increase in the workload. 
+By executing the kernel with matrices of varying sizes, the goal is to observe the impact of computational complexity on performance. This experiment aims to demonstrate how larger matrices, which involve more computations and data, affect the time it takes for the kernel to complete its tasks.
+
+4.2 Discussing Expectations of Experimental Results
+
+* When would you expect the results to be similar, and why?
+
+- Memory Bandwidth Constraints: If the execution time is mainly constrained by memory bandwidth, 
+the increase in execution time with larger matrices might not be proportional. 
+This is because both small and large matrix operations could be bottlenecked by the rate at which data is moved to and from memory, 
+rather than how quickly the computations can be performed. 
+- Kernel Launch and Data Transfer Overheads: For smaller matrices, the time taken for the overhead of launching the 
+kernel and transferring data between the host and device memory might be a significant portion of the total execution time. 
+This could make the relative execution times appear more similar since these overheads do not scale directly with matrix size.
+
+* When would you expect the results to be different, and why?
+
+- Computational Complexity and GPU Utilization: The results are expected to differ significantly when computational demands 
+increase, as seen with the larger matrix. A 512x512 matrix has four times as many elements as a 256x256 matrix, 
+implying a much higher computational load. In scenarios where the GPU's parallel processing capabilities are a limiting factor, 
+larger matrices utilize more of these capabilities, potentially leading to a non-linear increase in execution 
+time due to the increased number of operations required.
+- Parallel Processing Efficiency: Larger matrices typically translate to better utilization of the GPU's parallel processing power.
+With more data to process, the GPU's numerous cores can be employed more effectively, reducing idle time per core and 
+improving overall computational efficiency. However, this increased efficiency in computation might also reveal 
+bottlenecks elsewhere, such as memory access patterns, which can vary based on the problem size and the 
+specifics of the GPU architecture.
+
+

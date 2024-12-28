@@ -1,0 +1,123 @@
+tantrav@cocoi9:~/tantrav$ nvcc -o matrix_multiply matrix_multiply.cu
+tantrav@cocoi9:~/tantrav$ ./matrix_multiply
+Time elapsed is 0 seconds and 10 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=1, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=2, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=4, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=8, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=16, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=32, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=64, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=128, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 1 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=256, ThreadsPerBlock=1024
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=32
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=64
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=128
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=256
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=512
+Time elapsed is 0 seconds and 0 microseconds
+Configuration: Blocks=512, ThreadsPerBlock=1024
+tantrav@cocoi9:~/tantrav$

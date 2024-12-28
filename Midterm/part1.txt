@@ -1,0 +1,7 @@
+Author: Venkatesh Tantravahi
+
+The CUDA kernel function shown above implements matrix multiplication. It computes the product of two matrices, `X` and `Y`, 
+and stores the result in matrix `Z`. Each thread in the CUDA grid is responsible for calculating a single element in the 
+resultant matrix `Z` by performing a dot product of the corresponding row from `X` and the column from `Y`. 
+The matrix dimensions are assumed to be square, given by the `size` parameter. Each thread identifies its position in the 
+output matrix using its block and thread indices, ensuring it computes the correct element.

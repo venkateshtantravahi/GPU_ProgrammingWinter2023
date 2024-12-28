@@ -1,0 +1,142 @@
+Author: Venkatesh Tantravahi
+
+#include <iostream>
+#include <cstdlib>
+#include <sys/time.h>
+#include <ctime>
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
+struct MyTime {
+    char *time_of_day;      // Start time of the experiment
+    int seconds_elapsed;    // Seconds elapsed for call to myKernel
+    int useconds_elapsed;   // Microseconds elapsed for call to myKernel
+};
+
+/**
+ * Tests the performance of the myKernel CUDA kernel function.
+ * 
+ * @param X Pointer to the first input matrix in device memory.
+ * @param Y Pointer to the second input matrix in device memory.
+ * @param Z Pointer to the output matrix in device memory.
+ * @param size The size of the NxN matrices.
+ * @return A MyTime structure containing the time of day when the test started and the elapsed time.
+ */
+MyTime myKernelTester(float *X, float *Y, float *Z, int size) {
+    // Define the number of threads and blocks in each dimension
+    dim3 threadsPerBlock(16, 16);
+    dim3 numBlocks((size + threadsPerBlock.x - 1) / threadsPerBlock.x,
+                   (size + threadsPerBlock.y - 1) / threadsPerBlock.y);
+
+    // Create CUDA events for timing
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    // Get the current time of day
+    struct timeval start_time;
+    gettimeofday(&start_time, NULL);
+    struct tm* timeinfo = localtime(&start_time.tv_sec);
+    char timeString[100];
+    strftime(timeString, sizeof(timeString), "%a %b %d %H:%M:%S %Z %Y", timeinfo);
+
+    // Allocate a string for time_of_day
+    char* time_of_day = new char[strlen(timeString) + 1];
+    strcpy(time_of_day, timeString);
+
+    // Start timing
+    cudaEventRecord(start);
+
+    // Launch the kernel
+    myKernel<<<numBlocks, threadsPerBlock>>>(X, Y, Z, size);
+    cudaDeviceSynchronize();
+
+    // Stop timing
+    cudaEventRecord(stop);
+    cudaEventSynchronize(stop);
+
+    // Calculate the elapsed time
+    float milliseconds = 0;
+    cudaEventElapsedTime(&milliseconds, start, stop);
+    int seconds = static_cast<int>(milliseconds / 1000);
+    int useconds = static_cast<int>((milliseconds - seconds * 1000) * 1000);
+
+    // Clean up CUDA events
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
+
+    // Return the timing information
+    MyTime result = {time_of_day, seconds, useconds};
+    delete[] time_of_day; // Assuming MyTime does not need to persist this data.
+    return result;
+}
+
+// Assuming the MyTime struct and myKernelTester are included from previous code
+// External declarations (not defined here for brevity)
+extern struct MyTime myKernelTester(float *, float *, float *, int);
+
+// Helper function to initialize matrix with random floats
+void initializeMatrix(float* matrix, int size) {
+    for (int i = 0; i < size * size; i++) {
+        matrix[i] = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+    }
+}
+
+int main() {
+    const int size1 = 256;  // Size of the first matrix
+    const int size2 = 512;  // Size of the second matrix
+
+    float *X1, *Y1, *Z1;
+    float *X2, *Y2, *Z2;
+
+    // Allocate memory for matrices in device
+    cudaMalloc(&X1, size1 * size1 * sizeof(float));
+    cudaMalloc(&Y1, size1 * size1 * sizeof(float));
+    cudaMalloc(&Z1, size1 * size1 * sizeof(float));
+    cudaMalloc(&X2, size2 * size2 * sizeof(float));
+    cudaMalloc(&Y2, size2 * size2 * sizeof(float));
+    cudaMalloc(&Z2, size2 * size2 * sizeof(float));
+
+    // Allocate memory and initialize matrices on host
+    float* h_X1 = new float[size1 * size1];
+    float* h_Y1 = new float[size1 * size1];
+    float* h_X2 = new float[size2 * size2];
+    float* h_Y2 = new float[size2 * size2];
+
+    initializeMatrix(h_X1, size1);
+    initializeMatrix(h_Y1, size1);
+    initializeMatrix(h_X2, size2);
+    initializeMatrix(h_Y2, size2);
+
+    // Copy matrices to device
+    cudaMemcpy(X1, h_X1, size1 * size1 * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(Y1, h_Y1, size1 * size1 * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(X2, h_X2, size2 * size2 * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(Y2, h_Y2, size2 * size2 * sizeof(float), cudaMemcpyHostToDevice);
+
+    // Call the kernel tester function twice with different sizes
+    MyTime timeInfo1 = myKernelTester(X1, Y1, Z1, size1);
+    MyTime timeInfo2 = myKernelTester(X2, Y2, Z2, size2);
+
+    // Output the results
+    std::cout << "Test 1: " << timeInfo1.time_of_day << ", " 
+              << timeInfo1.seconds_elapsed << "s " 
+              << timeInfo1.useconds_elapsed << "us" << std::endl;
+    std::cout << "Test 2: " << timeInfo2.time_of_day << ", " 
+              << timeInfo2.seconds_elapsed << "s " 
+              << timeInfo2.useconds_elapsed << "us" << std::endl;
+
+    // Cleanup
+    cudaFree(X1);
+    cudaFree(Y1);
+    cudaFree(Z1);
+    cudaFree(X2);
+    cudaFree(Y2);
+    cudaFree(Z2);
+    delete[] h_X1;
+    delete[] h_Y1;
+    delete[] h_X2;
+    delete[] h_Y2;
+
+    return 0;
+}

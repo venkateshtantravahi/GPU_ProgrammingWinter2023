@@ -1,0 +1,10 @@
+tantrav@cocoi9:~/tantrav$ touch more_matrix_multiply.cu
+tantrav@cocoi9:~/tantrav$ nano more_matrix_multiply.cu
+tantrav@cocoi9:~/tantrav$ nvcc -o more_matrix_multiply more_matrix_multiply.cu
+tantrav@cocoi9:~/tantrav$ ./more_matrix_multiply
+Time elapsed is 0 seconds and 165 microseconds
+Sample elements of the copied matrix:
+0 1 2 3 4 5 6 7 8 9
+Time elapsed is 0 seconds and 5399 microseconds
+tantrav@cocoi9:~/tantrav$
+
