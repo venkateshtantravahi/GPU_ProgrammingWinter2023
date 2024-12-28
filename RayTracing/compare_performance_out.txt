@@ -1,0 +1,5 @@
+tantrav@cocoi9:~/tantrav$ nvcc -o compare_performance compare_performance.cu
+tantrav@cocoi9:~/tantrav$ ./compare_performance
+Naive kernel time (ms): 8.66099
+Tiled kernel time (ms): 5.40422
+Performance Improvement: 37.6027%

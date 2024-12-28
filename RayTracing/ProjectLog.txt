@@ -1,0 +1,40 @@
+Project Log Report: Ray Tracing Simple Sphere Objects
+
+Project Title: Ray Tracing Simple Sphere Objects
+
+Objective:
+The goal of this project was to optimize existing CPU-based ray tracing code by adapting and enhancing it for GPU execution using CUDA. This aligns with the class guidelines on creating or optimizing GPU-based code.
+
+Initial Setup:
+The project began with a basic ray tracing program sourced from the following GitHub repository:
+
+Source Repository: scratchapixel on GitHub(https://github.com/scratchapixel/scratchapixel-code/blob/main/introduction-to-ray-tracing/raytracer.cpp)
+This initial code was designed to run on the CPU and was capable of rendering simple scenes involving spheres.
+
+Adaptation to CUDA:
+The initial code was broken down and restructured to leverage CUDA’s capabilities, focusing on parallel processing of the ray tracing calculations. Key adaptations included:
+
+- Modularization: The original setup was refactored into separate header files for each object type, enhancing code maintainability and readability.
+- Kernel Conversion: Core computations were converted into CUDA kernels. This involved rewriting the sphere rendering logic to run as __device__ functions, enabling them to execute on the GPU.
+
+Performance Before Optimization:
+- Original CPU Code Performance: The initial code from GitHub rendered a simple scene in approximately 0.276561 seconds on the CPU.
+- Enhanced CPU Code Performance: After enhancing the CPU code for a more complex scenario, the rendering time significantly increased to 150.543 seconds due to the added complexity.
+
+CUDA Implementation and Optimizations:
+The CUDA-based version of the project involved several optimizations to improve performance:
+
+- Kernel Optimization: Fine-tuned CUDA kernels to better utilize GPU architecture, including optimizing memory access patterns and kernel execution configurations.
+- Memory Management: Implemented efficient memory handling techniques such as unified memory and pinned memory to minimize data transfer overhead between the CPU and GPU.
+- Profiling and Debugging: Used NVIDIA Nsight Compute and other CUDA profiling tools to identify bottlenecks and optimize kernel performance.
+
+Results from CUDA Implementation:
+Rendering Performance: The CUDA-enabled version rendered a 1200x800 image with 10 samples per pixel in just 2.35042 seconds, a significant improvement over the enhanced CPU version.
+
+Profiling Outcome:
+- Most time was spent in the render kernel, confirming its computational intensity.
+- Memory operations and API calls were optimized to reduce overhead.
+- Unified Memory profiling indicated some page faults, suggesting potential areas for further optimization.
+
+Current Challenges:
+Page Faults: Despite the performance gains, there are still opportunities to reduce GPU page faults, which could further improve rendering times and efficiency.
